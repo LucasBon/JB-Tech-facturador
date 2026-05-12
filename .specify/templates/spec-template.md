@@ -105,6 +105,7 @@
 <!--
   ACTION REQUIRED: Define measurable success criteria.
   These must be technology-agnostic and measurable.
+  REMINDER: Design must be minimalist, mobile-first, and optimized for low click-count.
 -->
 
 ### Measurable Outcomes

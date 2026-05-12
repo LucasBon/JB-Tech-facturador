@@ -1,50 +1,73 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+- Version change: Template -> 1.0.0
+- List of modified principles:
+  - Architecture & Stack (New)
+  - Resilience & Fault Tolerance (New)
+  - Exception Management (New)
+  - Testing Discipline (TDD) (New)
+  - Code Quality & Observability (New)
+  - UI/UX Standards (New)
+  - Security & Delivery (New)
+- Added sections: Core Principles, Governance
+- Removed sections: N/A
+- Templates requiring updates:
+  - ✅ updated: .specify/templates/plan-template.md
+  - ✅ updated: .specify/templates/spec-template.md
+  - ✅ updated: .specify/templates/tasks-template.md
+- Follow-up TODOs: None
+-->
+
+# Facturador JB Tech Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Architecture & Stack
+Facturador JB Tech is built using a modern, scalable stack and a robust architectural pattern to ensure long-term maintainability.
+- **Backend**: Java LTS (Current Long Term Support version).
+- **Frontend**: React.
+- **Architecture**: Strict adherence to **Clean Architecture** and **SOLID** principles.
+- **Dependency Management**: Minimalist approach to external libraries. Every third-party dependency must be strictly justified to avoid bloat and security risks.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Resilience & Fault Tolerance
+The system must remain operational and degrade gracefully when external components fail.
+- **Patterns**: Mandatory implementation of **Circuit Breaker** and **Rate Limit** for all interactions with external services (e.g., AFIP API).
+- **Retry Policy**: Default policy of **3 retries** with **Exponential Backoff** for all transient failures.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Exception Management
+Exceptions are treated as first-class citizens in our logic flow, ensuring system stability and security.
+- **Handling**: Catch exceptions only if they are being explicitly managed or transformed into a domain-specific context.
+- **Anti-pattern**: Avoid the 'catch-log-rethrow' pattern. Logs should happen where the exception is finally handled or at the boundary.
+- **Security**: Prevent internal stacktraces from ever reaching the client/frontend. All public errors must be mapped to safe, user-friendly messages.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Testing Discipline (TDD)
+Quality is built-in, not added later.
+- **Approach**: **TDD is mandatory**. No implementation code should be written without a failing test first.
+- **Unit Testing**: Tests must be significant, non-redundant, and achieve >80% coverage.
+- **Integration & E2E**: Prioritize functional and End-to-End tests that validate the complete user flow over excessive low-level unit tests.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Code Quality & Observability
+Code must be easy to read, understand, and debug.
+- **Documentation**: Prioritize self-documenting code (meaningful names, clear structure). Javadoc is reserved for explaining the *purpose* and *return values* of public APIs.
+- **Logging**: Focused on troubleshooting. Every log entry must provide technical context (correlation IDs, state). 
+- **Privacy**: Strictly prohibit logging PII (Personally Identifiable Information) or sensitive data (credentials, secrets).
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### VI. UI/UX Standards
+We build tools that empower users through simplicity and speed.
+- **Design**: Minimalist, **mobile-first**, and fully responsive.
+- **Efficiency**: Maximize user productivity by minimizing the number of clicks required to complete any primary task.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### VII. Security & Delivery
+Safety and consistency in how we build and deploy.
+- **Compliance**: Follow **OWASP** top 10 security practices.
+- **Secrets**: All secrets (API keys, DB credentials) must be managed strictly via environment variables. Never hardcode or commit secrets.
+- **Commits**: Use **Conventional Commits** for all changes. Each commit must be atomic and represent a single logical change.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+This constitution is the supreme guide for development within the Facturador JB Tech project.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- **Compliance**: All Pull Requests must be reviewed against these principles. Violations require explicit justification in a "Complexity Tracking" section of the implementation plan.
+- **Amendments**: Changes to these principles require a version bump and updated documentation across all templates.
+- **Versioning**: Follow Semantic Versioning for the constitution itself.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-05-11 | **Last Amended**: 2026-05-11

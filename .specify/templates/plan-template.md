@@ -31,7 +31,13 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- [ ] **Architecture**: Does it follow Clean Architecture & SOLID? Minimal dependencies?
+- [ ] **Resilience**: Are Circuit Breaker, Rate Limit, and Exponential Backoff (3x) planned for external calls?
+- [ ] **Exceptions**: Is the handling strategy 'transform or manage' (no catch-log-rethrow)?
+- [ ] **Testing**: Is TDD mandatory? Are functional/E2E tests prioritized for the flow?
+- [ ] **Observability**: Is logging technical-context oriented and PII-free?
+- [ ] **UI/UX**: Is the design minimalist, mobile-first, and optimized for low click-count?
+- [ ] **Security**: Does it follow OWASP and use env vars for secrets?
 
 ## Project Structure
 
