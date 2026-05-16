@@ -36,7 +36,7 @@
 - [ ] **Exceptions**: Is the handling strategy 'transform or manage' (no catch-log-rethrow)?
 - [ ] **Testing**: Is TDD mandatory? Are functional/E2E tests prioritized for the flow?
 - [ ] **Observability**: Is logging technical-context oriented and PII-free?
-- [ ] **UI/UX**: Is the design minimalist, mobile-first, and optimized for low click-count?
+- [ ] **UI/UX**: Does it follow the Unified Frontend Strategy (RWD/PWA) with Mobile-First Excellence?
 - [ ] **Security**: Does it follow OWASP and use env vars for secrets?
 
 ## Project Structure
@@ -89,12 +89,13 @@ frontend/
 │   └── services/
 └── tests/
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
+# [REMOVE IF UNUSED] Option 3: Monorepo / Shared Packages
+apps/
+├── web/ (Unified Frontend)
+└── api/
 
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+packages/
+└── shared/ (Domain logic, types, validation)
 ```
 
 **Structure Decision**: [Document the selected structure and reference the real

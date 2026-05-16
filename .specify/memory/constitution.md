@@ -1,15 +1,9 @@
 <!--
 Sync Impact Report:
-- Version change: Template -> 1.0.0
+- Version change: 1.1.0 -> 1.1.1
 - List of modified principles:
-  - Architecture & Stack (New)
-  - Resilience & Fault Tolerance (New)
-  - Exception Management (New)
-  - Testing Discipline (TDD) (New)
-  - Code Quality & Observability (New)
-  - UI/UX Standards (New)
-  - Security & Delivery (New)
-- Added sections: Core Principles, Governance
+  - UI/UX Standards (Clarified: Mobile-First + Desktop Optimization)
+- Added sections: N/A
 - Removed sections: N/A
 - Templates requiring updates:
   - ✅ updated: .specify/templates/plan-template.md
@@ -53,8 +47,10 @@ Code must be easy to read, understand, and debug.
 - **Privacy**: Strictly prohibit logging PII (Personally Identifiable Information) or sensitive data (credentials, secrets).
 
 ### VI. UI/UX Standards
-We build tools that empower users through simplicity and speed.
-- **Design**: Minimalist, **mobile-first**, and fully responsive.
+We build tools that empower users through simplicity and speed across all devices.
+- **Unified Frontend Strategy**: Maintain a single React codebase using **Responsive Web Design (RWD)** and **PWA** capabilities. This ensures consistency, avoids logic duplication, and simplifies maintenance.
+- **Mobile-First Excellence**: Interfaces must be designed starting from the mobile experience (content prioritization). Mobile users should have access to 100% of the core functionality with a premium, native-like feel.
+- **Desktop Power-User Efficiency**: The desktop experience must leverage extra screen real estate for higher data density, advanced filtering, and keyboard-driven productivity required for intensive administrative work.
 - **Efficiency**: Maximize user productivity by minimizing the number of clicks required to complete any primary task.
 
 ### VII. Security & Delivery
@@ -70,4 +66,4 @@ This constitution is the supreme guide for development within the Facturador JB 
 - **Amendments**: Changes to these principles require a version bump and updated documentation across all templates.
 - **Versioning**: Follow Semantic Versioning for the constitution itself.
 
-**Version**: 1.0.0 | **Ratified**: 2026-05-11 | **Last Amended**: 2026-05-11
+**Version**: 1.1.1 | **Ratified**: 2026-05-11 | **Last Amended**: 2026-05-16
