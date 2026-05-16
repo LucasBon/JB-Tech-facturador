@@ -84,6 +84,15 @@ Como usuario administrador, quiero ver un reporte de todas las facturas emitidas
 - **Punto de Venta no habilitado**: Manejar el error específico de AFIP cuando el punto de venta enviado no corresponde al CUIT o no está habilitado para factura electrónica.
 - **CUIT inválido**: Validar el algoritmo de CUIT (módulo 11) antes de enviar la solicitud a AFIP.
 
+## Clarifications
+
+### Session 2026-05-16
+- Q: ¿Dónde debe generarse y almacenarse la clave privada durante el onboarding? → A: En el Backend de forma segura y transparente para el usuario.
+- Q: ¿Qué estrategia de multi-tenancy se debe utilizar para el aislamiento de datos? → A: Esquema compartido con columna discriminadora (`tenant_id`).
+- Q: ¿Cuál es el período de retención obligatorio para los logs de auditoría? → A: 10 años (plazo legal estándar).
+- Q: ¿Cómo se debe implementar la capacidad de procesamiento asincrónico? → A: Mediante un Event Bus interno para facilitar la evolución futura a colas de mensajería.
+- Q: ¿Qué arquitectura se debe seguir para la futura generación de PDF/QR? → A: Servicio de renderizado desacoplado para mantener el core enfocado en datos.
+
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
@@ -93,10 +102,11 @@ Como usuario administrador, quiero ver un reporte de todas las facturas emitidas
 - **FR-003**: El sistema DEBE gestionar y cachear los Tickets de Acceso (TA) de forma aislada por cliente.
 - **FR-004**: El sistema DEBE integrar un IdP (Identity Provider) como **Keycloak** para la gestión de usuarios, roles (Admin, Facturador) y permisos por cliente.
 - **FR-005**: El sistema DEBE permitir el registro de múltiples clientes (contribuyentes) con aislamiento de datos.
-- **FR-006**: El sistema DEBE proporcionar una interfaz de onboarding para la generación de CSR y carga de certificados .crt de AFIP.
-- **FR-007**: El sistema DEBE registrar una auditoría completa de cada solicitud de comprobante (Timestamp, Usuario, Cliente, Payload, Respuesta AFIP).
-- **FR-008**: El sistema DEBE implementar patrones de resiliencia: Circuit Breaker y Reintentos (3 intentos, backoff exponencial).
-- **FR-009**: El sistema DEBE permitir la descarga de reportes temporales de facturación para validación y auditoría.
+- **FR-006**: El sistema DEBE utilizar un diseño basado en eventos internos para permitir el procesamiento asincrónico y la evolución futura hacia colas de mensajería externas.
+- **FR-007**: El sistema DEBE proporcionar una interfaz de onboarding que gestione la generación del CSR y la clave privada de forma segura en el servidor (backend).
+- **FR-008**: El sistema DEBE registrar una auditoría completa de cada solicitud de comprobante con una retención mínima de 10 años.
+- **FR-009**: El sistema DEBE implementar patrones de resiliencia: Circuit Breaker y Reintentos (3 intentos, backoff exponencial).
+- **FR-010**: El sistema DEBE permitir la descarga de reportes temporales de facturación para validación y auditoría.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -119,5 +129,5 @@ Como usuario administrador, quiero ver un reporte de todas las facturas emitidas
 - Se utilizará Keycloak como solución estándar para autenticación y autorización.
 - El sistema proveerá instructivos integrados basados en el manual `manual_desarrollador_COMPG_v3_3.pdf` para guiar al usuario en AFIP.
 - La persistencia local de auditoría se realizará en una base de datos relacional (PostgreSQL sugerido).
-- El backend en Java LTS implementará la lógica de multi-tenancy mediante esquemas o discriminadores de datos.
-- No se requiere inicialmente la generación de PDF con QR (quedando como roadmap futuro).
+- El backend en Java LTS implementará la lógica de multi-tenancy mediante columnas discriminadoras (`tenant_id`) en un esquema compartido.
+- No se requiere inicialmente la generación de PDF con QR (quedando como roadmap futuro mediante un servicio de renderizado desacoplado).
